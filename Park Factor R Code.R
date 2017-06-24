@@ -101,15 +101,18 @@ mod5
 ################
 #Multiple linear regression
 
-#We want to prove that which of the many predictors we have is a significant predictor for our Park Factor. So we create a full model of multiple predictors with Park Factor as the response variable.
+#We want to prove that which of the many predictors we have is a significant predictor for our Park Factor.
+#So we create a full model of multiple predictors with Park Factor as the response variable.
 
 
 
-fullmultiplemlb <- lm(MLB_2012$PF ~ MLB_2012$ERAratio + MLB_2012$OBPratio + MLB_2012$SLGratio + MLB_2012$OF.Area + MLB_2012$hwp)
+fullmultiplemlb <- lm(MLB_2012$PF ~ MLB_2012$ERAratio + MLB_2012$OBPratio + MLB_2012$SLGratio +
+                      MLB_2012$OF.Area + MLB_2012$hwp)
 summary(fullmultiplemlb)
 plot(fullmultiplemlb)
 
-#Looking at the p-values, with p values less that 0.05, we can say that the predictors ERA ratio, OBPratio, and SLGratio are significant predictors in our MLR. 
+#Looking at the p-values, with p values less that 0.05, we can say that the predictors ERA ratio, OBPratio,
+#and SLGratio are significant predictors in our MLR. 
 
 
 reducedmultiplemlb <- lm(MLB_2012$PF ~ MLB_2012$ERAratio + MLB_2012$OBPratio + MLB_2012$SLGratio)
@@ -117,16 +120,24 @@ summary(reducedmultiplemlb)
 
 anova(reducedmultiplemlb,fullmultiplemlb)
 
-#Looking at the ANOVA table, because the F stat of 1.9688 has a p-value of 0.1417, we cannot reject the null hypothesis (where all the slopes are equal to each other) at the significance level of 5%. So the variables Outfield Area and Home Winning Percentage do not contribute significant information to the Park Factor. 
+#Looking at the ANOVA table, because the F stat of 1.9688 has a p-value of 0.1417, we cannot reject the null
+#hypothesis (where all the slopes are equal to each other) at the significance level of 5%. So the variables
+#Outfield Area and Home Winning Percentage do not contribute significant information to the Park Factor. 
 
-#When we compare the adjusted R^2 value from the full model to the reduced model, we notice a very insignificant difference. From 0.7528 in our Full model to 0.7509 in our reduced model.
+#When we compare the adjusted R^2 value from the full model to the reduced model, we notice a very insignificant
+#difference. From 0.7528 in our Full model to 0.7509 in our reduced model.
 
-#And looking at our reduced model, we notice and can conclude again that ERAratio, OBPratio, and SLGratio are significant predictors for our response variable, Park Factor.
+#And looking at our reduced model, we notice and can conclude again that ERAratio, OBPratio, and SLGratio are
+#significant predictors for our response variable, Park Factor.
 
 
 
 par(mfrow=c(2,2))
 plot(fullmultiplemlb)
 
-#The variable SLG has the largest effect on PF with a large regression coefficient of 0.844545. While the variable of home winning percentage has the least effect on PF with a regression coefficient of -0.094. Judging by the p-values we can keep the predictors ERA ratio, OBP ratio, and SLG ratio, but most likely better to remove our OF.Area and home winning percentage. Changes in the good predictor's value are related to changes in the PF. While changes in our OF.Area and home winning percentage are not associated with changes in our PF.
+#The variable SLG has the largest effect on PF with a large regression coefficient of 0.844545. While the variable
+#of home winning percentage has the least effect on PF with a regression coefficient of -0.094. Judging by the
+#p-values we can keep the predictors ERA ratio, OBP ratio, and SLG ratio, but most likely better to remove our OF.Area
+#and home winning percentage. Changes in the good predictor's value are related to changes in the PF. While changes
+#in our OF.Area and home winning percentage are not associated with changes in our PF.
 
